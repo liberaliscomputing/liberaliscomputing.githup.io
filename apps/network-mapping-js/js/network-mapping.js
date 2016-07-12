@@ -1,7 +1,7 @@
 var cy = cytoscape({
   container: document.getElementById('cy'),
   layout: {
-    name: 'cose'
+    name: 'concentric' //use cose for force-directed-like visualization
   },
   elements: network,
   style: [
