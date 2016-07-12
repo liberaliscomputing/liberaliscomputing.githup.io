@@ -1,1 +1,7 @@
 .DS_Store
+apps/network-mapping-js/data/
+apps/network-mapping-js/node_modules
+apps/network-mapping-js/.env
+apps/network-mapping-js/.gitignore
+apps/network-mapping-js/convert.py
+
