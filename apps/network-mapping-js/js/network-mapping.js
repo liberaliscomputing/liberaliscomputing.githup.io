@@ -1,7 +1,8 @@
+//initialize a base graph
 var cy = cytoscape({
   container: document.getElementById('cy'),
   layout: {
-    name: 'concentric' //use cose for force-directed-like visualization
+    name: 'concentric'
   },
   elements: network,
   style: [
@@ -10,7 +11,7 @@ var cy = cytoscape({
       style: {
 				'width': '50px',
 				'height': '50px',
-        'label': 'data(id)',
+				'label': 'data(id)',
 				'background-image': 'data(profileImageUrlHttps)',
 				'background-fit':'contain'
       }
@@ -23,3 +24,13 @@ var cy = cytoscape({
     }
   ]
 });
+
+//open a clicked node's Twitter profile in a new window tab
+cy.on('click', 'node', function(){
+	var url = 'https://twitter.com/';
+	window.open(url + this.id(),'_blank');
+});
+
+//calculate each node's pagerank value
+var pageRank = cy.elements().pageRank(0.85, 0.001);
+console.log('g rank: ' + pageRank.rank('node'));
