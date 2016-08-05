@@ -1,0 +1,17 @@
+#vis {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  margin: auto;
+  left: 0px;
+}
+
+#stats {
+  margin-top: 100px;
+  font-family: sans-serif;
+}
+
+#stats img {
+  width: 100px;
+  height: 100px;
+}
