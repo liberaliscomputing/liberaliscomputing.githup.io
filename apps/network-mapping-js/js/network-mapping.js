@@ -123,15 +123,19 @@ var setEvents = cy
 	})
 	.on('mouseover', 'node', function(e){
 		this.addClass('hover');
-		var sel = e.cyTarget;
-		cy.elements().difference(sel.outgoers()).not(sel).addClass('transparent');
-		sel.addClass('highlight').outgoers().addClass('highlight');
+		var selectedNode = e.cyTarget;
+		var connectedEles = selectedNode.connectedEdges()
+			.union(selectedNode.connectedEdges().connectedNodes());
+		cy.elements().difference(connectedEles).not(selectedNode).addClass('transparent');
+		connectedEles.addClass('highlight');
 	})
 	.on('mouseout', 'node', function(e){
 		this.removeClass('hover');
-		var sel = e.cyTarget;
+		var selectedNode = e.cyTarget;
+		var connectedEles = selectedNode.connectedEdges()
+			.union(selectedNode.connectedEdges().connectedNodes());
 		cy.elements().removeClass('transparent');
-		sel.removeClass('highlight').outgoers().removeClass('highlight');
+		connectedEles.removeClass('highlight');
 	})
 ;
 
