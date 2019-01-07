@@ -1,48 +1,87 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>foo bar</title>
-        <link rel="stylesheet" href="public/css/bulma-0.7.2.min.css">
-    </head>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>gibberish</title>
+    <link rel="stylesheet" href="public/css/bulma-0.7.2.min.css">
+  </head>
     
-    <body>
-        <section>
-            <div class="hero-body">
-                <div class="container">
-                    <h1 class="title">foo bar</h1>
-                    <h2 class="subtitle">code data learn</h2>
-                </div>
+  <body>
+    <section>
+      <div class="hero-body">
+        <div class="container">
+          <div id="gibberish"></div>
+        </div>
+      </div>
+    </section>
+  </body>
+
+  <script src="public/js/jquery-2.2.4.min.js"></script>
+  <script src="https://unpkg.com/react@16.3.1/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16.3.1/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script> 
+  <script src="public/js/script.js"></script>
+  <script type="text/babel">
+    const colors = [
+      'is-white',
+      'is-black',
+      'is-light',
+      'is-dark',
+      'is-primary',
+      'is-link', 
+      'is-info', 
+      'is-success', 
+      'is-warning',
+      'is-danger'
+    ];
+    const isBold = [true, false];
+
+    const theme = [
+      'hero',
+      random(colors),
+      'is-fullheight',
+      random(isBold) ? 'is-bold' : ''
+    ].join(' ');
+    console.log(theme);
+
+    $('section').addClass(theme);
+
+    class Gibberish extends React.Component {
+      constructor(props) {
+        super(props);
+        this.state = { 
+          gibberish: '',
+        };
+        this.handleChange = this.handleChange.bind(this);
+      }
+
+      handleChange(event) {
+        this.setState({
+          gibberish: event.target.value,
+        });
+      }
+
+      render() {
+        const { gibberish } = this.state;
+        return (
+          <div className="field">
+            <div className="control is-large">
+              <input 
+                className="input is-large is-rounded" 
+                type="text"
+                value={gibberish}
+                onChange={this.handleChange}
+              />
+              <div className="content is-large">
+                {gibberish.length ? <p>{renderGibberish(gibberish)}</p>: null}
+              </div>
             </div>
-        </section>
-    </body>
+          </div>
+        );
+      }
+    }
 
-    <script src="public/js/jquery-2.2.4.min.js"></script>
-    <script src="public/js/script.js"></script>
-    <script>
-        var colors = [
-            'is-white',
-            'is-black',
-            'is-light',
-            'is-dark',
-            'is-primary',
-            'is-link', 
-            'is-info', 
-            'is-success', 
-            'is-warning',
-            'is-danger'
-        ];
-        var isBold = [true, false];
-
-        var theme = [
-            'hero',
-            random(colors),
-            'is-fullheight',
-            random(isBold) ? 'is-bold' : ''
-        ].join(' ');
-        console.log(theme);
-
-        $('section').addClass(theme);
-    </script>
+    ReactDOM.render(<Gibberish />, document.getElementById('gibberish'));
+  </script>
 </html>
